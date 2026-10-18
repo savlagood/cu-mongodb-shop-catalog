@@ -1,7 +1,7 @@
 name: mongodb-homework
 
 x-node: &node
-  image: mongo:8.0.30
+  image: docker.io/library/mongo:8.0.30
   command: [mongod, --replSet, hw2rs, --bind_ip_all, --wiredTigerCacheSizeGB, '0.25']
   healthcheck:
     test: [CMD, mongosh, --quiet, --eval, 'quit(db.adminCommand({ping:1}).ok ? 0 : 1)']
@@ -26,7 +26,7 @@ services:
       - data_m3:/data/db
 
   init:
-    image: mongo:8.0.30
+    image: docker.io/library/mongo:8.0.30
     depends_on:
       m1:
         condition: service_healthy
@@ -38,10 +38,10 @@ services:
       - .:/work:ro
     environment:
       HW_CASE: init
-    entrypoint: [mongosh, 'mongodb://m1:27017/admin?directConnection=true', --quiet, --file, /work/lab.js]
+    entrypoint: [mongosh, 'mongodb://m1:27017/admin?directConnection=true', --quiet, --file, /work/lab-podman.js]
 
   lab:
-    image: mongo:8.0.30
+    image: docker.io/library/mongo:8.0.30
     profiles:
       - tools
     depends_on:
@@ -56,7 +56,7 @@ services:
         export HW_CASE="$${1:-help}"
         export HW_DATASET="$${2:-}"
         if [ "$$HW_CASE" = shell ]; then exec mongosh "$$MONGODB_URI"; fi
-        exec mongosh "$$MONGODB_URI" --quiet --file /work/lab.js
+        exec mongosh "$$MONGODB_URI" --quiet --file /work/lab-podman.js
       - lab
     command: [help]
 

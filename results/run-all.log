@@ -1,0 +1,719 @@
+$ podman compose --profile tools run --rm lab all
+[4m>>>> Executing external compose provider "/Users/savvladislav/.local/share/podman-compose/bin/podman-compose". Please see podman-compose(1) for how to disable this message. <<<<
+
+[0m43f06dda4a9be2ef0c8b0b9ab2034dda8328845726b862e1ab2fda6bcd21b4d6
+mongodb-homework_init_1
+time="2026-10-18T21:35:18+03:00" level=warning msg="The input device is not a TTY. The --tty and --interactive flags might not work properly"
+]0;mongosh mongodb://m1:27017,m2:27017,m3:27017/hw2?replicaSet=hw2rs&retryWrites=true&serverSelectionTimeoutMS=10000&readPreference=primary
+RUN data
+{
+  "dataset": "2026-10-05",
+  "startedAt": {
+    "$date": "2026-10-18T18:35:18.784Z"
+  },
+  "server": "8.0.30"
+}
+PASS validator strict/error installed
+PASS validation valid
+PASS validation string-price
+PASS validation negative-stock
+PASS complete product documents clothes/L/2
+PASS search clothes/L/2
+PASS complete product documents clothes/M/5
+PASS search clothes/M/5
+PASS complete product documents accessories/L/3
+PASS search accessories/L/3
+PASS complete product documents clothes/L/99
+PASS search clothes/L/99
+PASS L=2 includes A
+PASS complete history documents
+PASS history 20 IDs including date ties
+PASS history other user
+PASS history other status
+PASS history no matches
+PASS report top 5 amounts/order/names
+PASS empty interval
+PASS from included
+PASS catalog price does not rewrite revenue
+
+REPORT: [2026-01-01, 2026-02-01), paid
+[
+  {
+    "sku": "A",
+    "name": "Футболка",
+    "qty": 3,
+    "revenue": "320.00"
+  },
+  {
+    "sku": "B",
+    "name": "Рубашка",
+    "qty": 4,
+    "revenue": "320.00"
+  },
+  {
+    "sku": "C",
+    "name": "Толстовка",
+    "qty": 3,
+    "revenue": "270.00"
+  },
+  {
+    "sku": "D",
+    "name": "Ремень",
+    "qty": 2,
+    "revenue": "240.00"
+  },
+  {
+    "sku": "E",
+    "name": "Сумка",
+    "qty": 1,
+    "revenue": "200.00"
+  }
+]
+
+REPORT: empty interval
+{
+  "from": {
+    "$date": "2024-01-01T00:00:00Z"
+  },
+  "to": {
+    "$date": "2024-02-01T00:00:00Z"
+  },
+  "rows": []
+}
+
+REPORT: included from boundary
+{
+  "from": {
+    "$date": "2026-01-01T00:00:00Z"
+  },
+  "to": {
+    "$date": "2026-01-01T00:00:00.001Z"
+  },
+  "rows": [
+    {
+      "qty": 4,
+      "revenue": {
+        "$numberDecimal": "320.00"
+      },
+      "sku": "B",
+      "name": "Рубашка"
+    },
+    {
+      "qty": 2,
+      "revenue": {
+        "$numberDecimal": "200.00"
+      },
+      "sku": "A",
+      "name": "Футболка"
+    }
+  ]
+}
+
+REPORT: after catalog price change
+{
+  "from": {
+    "$date": "2026-01-01T00:00:00Z"
+  },
+  "to": {
+    "$date": "2026-02-01T00:00:00Z"
+  },
+  "changedProduct": {
+    "sku": "A",
+    "price": {
+      "$numberDecimal": "999.00"
+    }
+  },
+  "rows": [
+    {
+      "qty": 3,
+      "revenue": {
+        "$numberDecimal": "320.00"
+      },
+      "sku": "A",
+      "name": "Футболка"
+    },
+    {
+      "qty": 4,
+      "revenue": {
+        "$numberDecimal": "320.00"
+      },
+      "sku": "B",
+      "name": "Рубашка"
+    },
+    {
+      "qty": 3,
+      "revenue": {
+        "$numberDecimal": "270.00"
+      },
+      "sku": "C",
+      "name": "Толстовка"
+    },
+    {
+      "qty": 2,
+      "revenue": {
+        "$numberDecimal": "240.00"
+      },
+      "sku": "D",
+      "name": "Ремень"
+    },
+    {
+      "qty": 1,
+      "revenue": {
+        "$numberDecimal": "200.00"
+      },
+      "sku": "E",
+      "name": "Сумка"
+    }
+  ]
+}
+
+HISTORY: userId=2500, status=paid
+[
+  "H24",
+  "H25",
+  "H22",
+  "H23",
+  "H20",
+  "H21",
+  "H18",
+  "H19",
+  "H16",
+  "H17",
+  "H14",
+  "H15",
+  "H12",
+  "H13",
+  "H10",
+  "H11",
+  "H08",
+  "H09",
+  "H06",
+  "H07"
+]
+
+COMPLETE data
+{
+  "passed": 22,
+  "results": "results/results.json"
+}
+
+RUN index
+{
+  "dataset": "2026-10-05",
+  "startedAt": {
+    "$date": "2026-10-18T18:35:18.953Z"
+  },
+  "server": "8.0.30"
+}
+PASS 10000 documents
+PASS only _id index initially
+PASS same IDs and order
+PASS matches independent fixture order
+PASS before scans collection + SORT
+PASS after uses IXSCAN without SORT
+PASS examines fewer documents
+
+INDEX
+{
+  "filter": {
+    "userId": 2500,
+    "status": "paid"
+  },
+  "sort": {
+    "createdAt": -1,
+    "_id": 1
+  },
+  "index": {
+    "userId": 1,
+    "status": 1,
+    "createdAt": -1,
+    "_id": 1
+  },
+  "hint": false,
+  "before": {
+    "nReturned": 20,
+    "totalKeysExamined": 0,
+    "totalDocsExamined": 10000,
+    "hasSORT": true
+  },
+  "after": {
+    "nReturned": 20,
+    "totalKeysExamined": 20,
+    "totalDocsExamined": 20,
+    "hasSORT": false
+  }
+}
+
+COMPLETE index
+{
+  "passed": 7,
+  "results": "results/results.json"
+}
+
+RUN purchase
+{
+  "dataset": "2026-10-05",
+  "startedAt": {
+    "$date": "2026-10-18T18:35:19.207Z"
+  },
+  "server": "8.0.30"
+}
+
+TX
+{
+  "event": "update_inside_transaction",
+  "sku": "A",
+  "matched": 1,
+  "modified": 1
+}
+
+TX
+{
+  "event": "update_inside_transaction",
+  "sku": "B",
+  "matched": 0,
+  "modified": 0
+}
+PASS second item insufficient
+PASS first update modified before abort
+PASS server observed started and aborted transaction
+PASS abort restores both full documents and leaves no order
+
+AFTER ABORT
+{
+  "stocks": [
+    {
+      "sku": "A",
+      "variants": [
+        {
+          "size": "L",
+          "stock": 0
+        },
+        {
+          "size": "M",
+          "stock": 10
+        }
+      ]
+    },
+    {
+      "sku": "B",
+      "variants": [
+        {
+          "size": "L",
+          "stock": 5
+        },
+        {
+          "size": "M",
+          "stock": 4
+        }
+      ]
+    },
+    {
+      "sku": "C",
+      "variants": [
+        {
+          "size": "L",
+          "stock": 3
+        },
+        {
+          "size": "M",
+          "stock": 2
+        }
+      ]
+    },
+    {
+      "sku": "D",
+      "variants": [
+        {
+          "size": "L",
+          "stock": 4
+        },
+        {
+          "size": "M",
+          "stock": 6
+        }
+      ]
+    },
+    {
+      "sku": "E",
+      "variants": [
+        {
+          "size": "L",
+          "stock": 2
+        },
+        {
+          "size": "M",
+          "stock": 1
+        }
+      ]
+    },
+    {
+      "sku": "F",
+      "variants": [
+        {
+          "size": "L",
+          "stock": 1
+        },
+        {
+          "size": "M",
+          "stock": 8
+        }
+      ]
+    }
+  ],
+  "orderCount": 0,
+  "orderIds": []
+}
+
+TX
+{
+  "event": "update_inside_transaction",
+  "sku": "A",
+  "matched": 1,
+  "modified": 1
+}
+
+TX
+{
+  "event": "update_inside_transaction",
+  "sku": "B",
+  "matched": 1,
+  "modified": 1
+}
+PASS server observed started and committed transaction
+PASS success changes only selected stocks
+PASS exactly one created order
+PASS userId/date types
+PASS snapshot item prices
+PASS saved items match request in original order
+PASS returned order is saved order
+PASS stored BSON types: integer user/qty, decimal prices, date
+
+SUCCESS
+{
+  "stocks": [
+    {
+      "sku": "A",
+      "variants": [
+        {
+          "size": "L",
+          "stock": 0
+        },
+        {
+          "size": "M",
+          "stock": 8
+        }
+      ]
+    },
+    {
+      "sku": "B",
+      "variants": [
+        {
+          "size": "L",
+          "stock": 4
+        },
+        {
+          "size": "M",
+          "stock": 4
+        }
+      ]
+    },
+    {
+      "sku": "C",
+      "variants": [
+        {
+          "size": "L",
+          "stock": 3
+        },
+        {
+          "size": "M",
+          "stock": 2
+        }
+      ]
+    },
+    {
+      "sku": "D",
+      "variants": [
+        {
+          "size": "L",
+          "stock": 4
+        },
+        {
+          "size": "M",
+          "stock": 6
+        }
+      ]
+    },
+    {
+      "sku": "E",
+      "variants": [
+        {
+          "size": "L",
+          "stock": 2
+        },
+        {
+          "size": "M",
+          "stock": 1
+        }
+      ]
+    },
+    {
+      "sku": "F",
+      "variants": [
+        {
+          "size": "L",
+          "stock": 1
+        },
+        {
+          "size": "M",
+          "stock": 8
+        }
+      ]
+    }
+  ],
+  "orderCount": 1,
+  "orderIds": [
+    "purchase-001"
+  ]
+}
+
+SAVED ORDER
+{
+  "_id": "purchase-001",
+  "userId": 2500,
+  "createdAt": {
+    "$date": "2026-10-18T18:35:19.278Z"
+  },
+  "status": "created",
+  "items": [
+    {
+      "sku": "A",
+      "size": "M",
+      "qty": 2,
+      "price": {
+        "$numberDecimal": "100.00"
+      }
+    },
+    {
+      "sku": "B",
+      "size": "L",
+      "qty": 1,
+      "price": {
+        "$numberDecimal": "80.00"
+      }
+    }
+  ]
+}
+PASS replay returns original order
+PASS replay no writes despite changed catalog price/key order
+
+REPLAY: same order, stocks unchanged
+{
+  "stocks": [
+    {
+      "sku": "A",
+      "variants": [
+        {
+          "size": "L",
+          "stock": 0
+        },
+        {
+          "size": "M",
+          "stock": 8
+        }
+      ]
+    },
+    {
+      "sku": "B",
+      "variants": [
+        {
+          "size": "L",
+          "stock": 4
+        },
+        {
+          "size": "M",
+          "stock": 4
+        }
+      ]
+    },
+    {
+      "sku": "C",
+      "variants": [
+        {
+          "size": "L",
+          "stock": 3
+        },
+        {
+          "size": "M",
+          "stock": 2
+        }
+      ]
+    },
+    {
+      "sku": "D",
+      "variants": [
+        {
+          "size": "L",
+          "stock": 4
+        },
+        {
+          "size": "M",
+          "stock": 6
+        }
+      ]
+    },
+    {
+      "sku": "E",
+      "variants": [
+        {
+          "size": "L",
+          "stock": 2
+        },
+        {
+          "size": "M",
+          "stock": 1
+        }
+      ]
+    },
+    {
+      "sku": "F",
+      "variants": [
+        {
+          "size": "L",
+          "stock": 1
+        },
+        {
+          "size": "M",
+          "stock": 8
+        }
+      ]
+    }
+  ],
+  "orderCount": 1,
+  "orderIds": [
+    "purchase-001"
+  ]
+}
+PASS changed qty rejected as request conflict
+PASS conflict changes nothing
+
+TX
+{
+  "event": "update_inside_transaction",
+  "sku": "A",
+  "matched": 1,
+  "modified": 1
+}
+
+TX
+{
+  "event": "update_inside_transaction",
+  "sku": "B",
+  "matched": 0,
+  "modified": 0
+}
+PASS missing variant rejected
+PASS missing variant rollback
+
+TX
+{
+  "event": "update_inside_transaction",
+  "sku": "A",
+  "matched": 1,
+  "modified": 1
+}
+
+TX
+{
+  "event": "update_inside_transaction",
+  "sku": "NO_SUCH_SKU",
+  "matched": 0,
+  "modified": 0
+}
+PASS unknown SKU rejected
+PASS unknown SKU rollback
+
+COMPLETE purchase
+{
+  "passed": 20,
+  "results": "results/results.json"
+}
+
+RUN failover
+{
+  "dataset": "2026-10-05",
+  "startedAt": {
+    "$date": "2026-10-18T18:35:19.370Z"
+  },
+  "server": "8.0.30"
+}
+PASS 3 data-bearing nodes ready
+PASS first majority write acknowledged
+
+ROLES BEFORE
+[
+  {
+    "host": "m1:27017",
+    "role": "PRIMARY"
+  },
+  {
+    "host": "m2:27017",
+    "role": "SECONDARY"
+  },
+  {
+    "host": "m3:27017",
+    "role": "SECONDARY"
+  }
+]
+
+FIRST WRITE
+{
+  "acknowledged": true,
+  "insertedId": "before",
+  "matchedCount": 0,
+  "modifiedCount": 0,
+  "upsertedCount": 1
+}
+PASS primary actually changed
+PASS same client instance
+PASS old majority document read
+PASS new majority write acknowledged
+PASS both documents present
+
+ROLES AFTER
+[
+  {
+    "host": "m1:27017",
+    "role": "SECONDARY"
+  },
+  {
+    "host": "m2:27017",
+    "role": "PRIMARY"
+  },
+  {
+    "host": "m3:27017",
+    "role": "SECONDARY"
+  }
+]
+
+READ OLD DOCUMENT
+{
+  "_id": "before",
+  "message": "majority confirmed before stepDown"
+}
+
+NEW WRITE
+{
+  "acknowledged": true,
+  "insertedId": "after",
+  "matchedCount": 0,
+  "modifiedCount": 0,
+  "upsertedCount": 1
+}
+
+COMPLETE failover
+{
+  "passed": 7,
+  "results": "results/results.json"
+}
+]0;

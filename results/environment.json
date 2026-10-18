@@ -1,0 +1,64 @@
+{
+  "recordedAt": "2026-10-18T18:35:36.595670+00:00",
+  "mode": "Podman Compose",
+  "command": [
+    "podman",
+    "compose",
+    "--profile",
+    "tools",
+    "run",
+    "--rm",
+    "lab",
+    "all"
+  ],
+  "project": "mongodb-homework",
+  "versions": {
+    "podmanClient": "6.1.2",
+    "podmanServer": "6.1.2",
+    "composeProvider": "podman version 6.1.2\npodman-compose version 1.6.0",
+    "mongosh": "2.10.0"
+  },
+  "machine": {
+    "name": "podman-machine-default",
+    "rootful": false,
+    "resources": {
+      "CPUs": 6,
+      "DiskSize": 100,
+      "Memory": 2048,
+      "USBs": []
+    }
+  },
+  "image": {
+    "reference": "docker.io/library/mongo:8.0.30",
+    "id": "43f06dda4a9be2ef0c8b0b9ab2034dda8328845726b862e1ab2fda6bcd21b4d6",
+    "digest": "sha256:91fe697b8446994bdcdbc2a3edd6f844976b121faf0b88427f1a90673e54d3e2",
+    "architecture": "arm64"
+  },
+  "replicaSet": "hw2rs",
+  "members": [
+    "m1:27017",
+    "m2:27017",
+    "m3:27017"
+  ],
+  "sourceHashes": {
+    "compose.yaml": "7be66cb2fe026085f11b650b11186adb6c773058afe5d5627c7e1bf9b514a17d",
+    "lab.js": "8fb3eea91272d1a9b1a9016c55fcd478c5a0e4d382c08951f36e5c8eef1e0d17",
+    "solution.js": "b3234457c388223100c2478dfa631ddcb919e5cb5a5078d9aa993ddd9be513b9"
+  },
+  "adaptations": [
+    "Explicit image registry in compose.yaml",
+    "Podman commands and explicit tools profile in lab.js help"
+  ],
+  "sourceRelocationAfterRun": {
+    "recordedAt": "2026-10-18T18:40:13.309382+00:00",
+    "from": "lab.js",
+    "to": "lab-podman.js",
+    "contentUnchanged": true,
+    "sha256": "8fb3eea91272d1a9b1a9016c55fcd478c5a0e4d382c08951f36e5c8eef1e0d17",
+    "originalLabRestoredFrom": "../task/lab.js",
+    "originalLabSha256": "8b6a15485bc2625e020bc5120a06bd2c59d821e954558b7d6f0e98f39322bc13",
+    "composeChange": "Both entrypoints now use /work/lab-podman.js instead of /work/lab.js",
+    "currentComposeSha256": "a815664985ee30f76ba04e08325bb77135f36c73d8990d97eb0d3a17c8a310c7",
+    "results": "The recorded run used the same script bytes under the old filename; no new execution is claimed."
+  }
+}
